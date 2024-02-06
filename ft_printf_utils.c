@@ -6,7 +6,7 @@
 /*   By: healeksa <healeksa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 16:31:04 by healeksa          #+#    #+#             */
-/*   Updated: 2024/02/05 19:11:07 by healeksa         ###   ########.fr       */
+/*   Updated: 2024/02/06 17:32:06 by healeksa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ int	ft_putnbr(int n)
 	return (count);
 }
 
-static int	ft_count_digits(int n)
+static int	ft_count_digits(unsigned int n)
 {
-	size_t	count;
+	int	count;
 
 	count = 0;
 	while (n != 0)
@@ -54,9 +54,9 @@ static int	ft_count_digits(int n)
 	return (count);
 }
 
-char	*ft_unsigned_itoa(int n)
+char	*ft_unsigned_itoa(unsigned int n)
 {
-	size_t	digit_count;
+	int	digit_count;
 	char	*num;
 
 	digit_count = ft_count_digits(n);
