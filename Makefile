@@ -21,9 +21,6 @@ fclean: clean
 	$(RM) $(NAME)
 	make fclean -C ./libft/
 
-test: all
-	cc main.c $(NAME)
-
 re: fclean all
 
 .PHONY: all clean fclean re

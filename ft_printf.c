@@ -6,13 +6,14 @@
 /*   By: healeksa <healeksa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 12:26:34 by healeksa          #+#    #+#             */
-/*   Updated: 2024/02/05 19:17:16 by healeksa         ###   ########.fr       */
+/*   Updated: 2024/02/08 12:45:56 by healeksa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>
 
-// p, u, x, X
+// p
 
 int	ft_format(char c, va_list arg)
 {
@@ -24,15 +25,13 @@ int	ft_format(char c, va_list arg)
 	else if (c == 's')
 		len += ft_putstr(va_arg(arg, char *), 1);
 	else if (c == 'p')
-		ft_putchar_fd('p', 1);
+		len += ft_print_ptr(va_arg(arg, unsigned long long));
 	else if (c == 'd' || c == 'i')
 		len += ft_putnbr(va_arg(arg, int));
 	else if (c == 'u')
-		ft_putstr("lol", 1);
-	else if (c == 'x')
-		ft_putchar_fd('x', 1);
-	else if (c == 'X')
-		ft_putchar_fd('X', 1);
+		len += ft_uputnbr(va_arg(arg, unsigned int));
+	else if (c == 'x' || c == 'X')
+		len += ft_print_hex(va_arg(arg, unsigned int), c);
 	else if (c == '%')
 		len += ft_putchar_fd('%', 1);
 	return (len);
@@ -57,7 +56,7 @@ int	ft_printf(const char *s, ...)
 		else
 			n += ft_putchar_fd(s[i], 1);
 		i++;
-
 	}
+	va_end(arg);
 	return (n);
 }

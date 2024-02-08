@@ -6,42 +6,13 @@
 /*   By: healeksa <healeksa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 16:31:04 by healeksa          #+#    #+#             */
-/*   Updated: 2024/02/06 17:32:06 by healeksa         ###   ########.fr       */
+/*   Updated: 2024/02/08 12:39:28 by healeksa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
+#include "ft_printf.h"
 
-int	ft_putstr(char *s, int fd)
-{
-	int	i;
-	int	len;
-
-	i = 0;
-	len = 0;
-	if (!s)
-		s = "(null)";
-	while (s[i])
-	{
-		len += ft_putchar_fd(s[i], fd);
-		i++;
-	}
-	return (len);
-}
-
-int	ft_putnbr(int n)
-{
-	char	*num;
-	int		count;
-
-	num = ft_itoa(n);
-	count = ft_strlen(num);
-	ft_putstr(num, 1);
-	free(num);
-	return (count);
-}
-
-static int	ft_count_digits(unsigned int n)
+int	ft_count_digits(unsigned int n)
 {
 	int	count;
 
@@ -54,35 +25,65 @@ static int	ft_count_digits(unsigned int n)
 	return (count);
 }
 
-char	*ft_unsigned_itoa(unsigned int n)
+int	ft_uputnbr(unsigned long n)
 {
-	int	digit_count;
+	int		digit_count;
 	char	*num;
+	int		count;
 
+	if (n == 0)
+		return (write(1, "0", 1));
 	digit_count = ft_count_digits(n);
 	num = (char *)malloc(sizeof(char) * (digit_count + 1));
 	if (!num)
-		return (NULL);
+		return (0);
 	num[digit_count] = '\0';
-	if (n == 0)
-		num[0] = '0';
 	while (n != 0)
 	{
 		digit_count--;
 		num[digit_count] = n % 10 + '0';
 		n /= 10;
 	}
-	return (num);
-}
-
-int	ft_unsigned(int n)
-{
-	char	*num;
-	int		count;
-
-	num = ft_unsigned_itoa(n);
 	count = ft_strlen(num);
 	ft_putstr(num, 1);
 	free(num);
 	return (count);
+}
+
+int	ft_print_hex(unsigned long long n, char format)
+{
+	char	*hex;
+	int		res;
+
+	res = 0;
+	if (n >= 16)
+	{
+		res += ft_print_hex(n / 16, format);
+		res += ft_print_hex(n % 16, format);
+	}
+	else
+	{
+		if (n == 0)
+			res = ft_putchar_fd('0', 1);
+		hex = "0123456789abcdef";
+		while (n != 0)
+		{
+			if (format == 'X')
+				res += ft_putchar_fd(ft_toupper(hex[n % 16]), 1);
+			else
+				res += ft_putchar_fd(hex[n % 16], 1);
+			n /= 16;
+		}
+	}
+	return (res);
+}
+
+int	ft_print_ptr(unsigned long long ptr)
+{
+	int	res;
+
+	res = 0;
+	res += ft_putstr("0x", 1);
+	res += ft_print_hex(ptr, 'x');
+	return (res);
 }

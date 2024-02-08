@@ -1,18 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tolower.c                                       :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: healeksa <healeksa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/26 16:27:56 by healeksa          #+#    #+#             */
-/*   Updated: 2024/01/26 16:29:00 by healeksa         ###   ########.fr       */
+/*   Created: 2024/02/08 12:31:18 by healeksa          #+#    #+#             */
+/*   Updated: 2024/02/08 12:31:21 by healeksa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_tolower(int c)
+#include "libft.h"
+
+int	ft_putnbr(int n)
 {
-	if (c >= 65 && c <= 90)
-		return (c + 32);
-	return (c);
+	char	*num;
+	int		count;
+
+	num = ft_itoa(n);
+	count = ft_strlen(num);
+	ft_putstr(num, 1);
+	free(num);
+	return (count);
 }
