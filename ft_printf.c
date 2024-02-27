@@ -6,14 +6,11 @@
 /*   By: healeksa <healeksa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 12:26:34 by healeksa          #+#    #+#             */
-/*   Updated: 2024/02/08 12:45:56 by healeksa         ###   ########.fr       */
+/*   Updated: 2024/02/26 18:35:38 by healeksa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
-
-// p
 
 int	ft_format(char c, va_list arg)
 {
